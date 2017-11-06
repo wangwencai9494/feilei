@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="分类聚合">
+    <meta name="description" content="化龙巷-手机移动版">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="blank" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/swiper.js"></script>
+    <script>
+        //JS监听浏览器文字大小代码
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if(clientWidth > 750) clientWidth = 750;
+                    docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                };
+
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
+</head>
+<body>
+    <div class="main">
+        <!-- banner begin -->
+        <div class="banner-img swiper-container">
+            <div class="swiper-wrapper">
+                <a href="#" class="swiper-slide">
+                    <img src="images/sample.jpg" />
+                    <p>我的生活，简单美好，不喜欢可以绕行，但请不要打扰</p></a>
+                <a href="#" class="swiper-slide">
+                    <img src="images/sample.jpg" />
+                    <p>我的生活，简单美好，不喜欢可以绕行，但请不要打扰</p></a>
+                <a href="#" class="swiper-slide">
+                    <img src="images/sample.jpg" />
+                    <p>我的生活，简单美好，不喜欢可以绕行，但请不要打扰</p>
+                </a>
+            </div>
+            <div class="banner-loop swiper-pagination"></div>
+        </div>
+        <!--banner end-->
+        <!-- nav begin -->
+        <div class="banner-icon swiper-container">
+            <div class="swiper-wrapper">
+                <a class="swiper-slide">
+                    <div class="nav clearfix">
+                        <div class="nav-a" href="#">
+                            <img class="lazy_entrance" src="http://pic.app.hualongxiang.com/_20170925163702_59c8c02e5574f.jpg" />
+                            <span>网购市场</span>
+                        </div>
+                        <div class="nav-a" href="#">
+                            <img class="lazy_entrance" src="http://pic.app.hualongxiang.com/_20170925163711_59c8c0370c54f.jpg" />
+                            <span>跳蚤市场</span>
+                        </div>
+                        <div class="nav-a" href="#">
+                            <img class="lazy_entrance" src="http://pic.app.hualongxiang.com/_20170925163702_59c8c02e5574f.jpg" />
+                            <span>房屋信息</span>
+                        </div>
+                        <div class="nav-a" href="#">
+                            <img class="lazy_entrance" src="http://pic.app.hualongxiang.com/_20170925163711_59c8c0370c54f.jpg" />
+                            <span>商家自荐</span>
+                        </div>
+                        <div class="nav-a" href="#">
+                            <img class="lazy_entrance" src="http://pic.app.hualongxiang.com/_20170925163702_59c8c02e5574f.jpg" />
+                            <span>手机交易</span>
+                        </div>
+                        <div class="nav-a" href="#">
+                            <img class="lazy_entrance" src="http://pic.app.hualongxiang.com/_20170925163711_59c8c0370c54f.jpg" />
+                            <span>招聘信息</span>
+                        </div>
+                        <div class="nav-a" href="#">
+                            <img class="lazy_entrance" src="http://pic.app.hualongxiang.com/_20170925163702_59c8c02e5574f.jpg" />
+                            <span>数码游戏</span>
+                        </div>
+                        <div class="nav-a" href="#">
+                            <img class="lazy_entrance" src="http://pic.app.hualongxiang.com/_20170925163711_59c8c0370c54f.jpg" />
+                            <span>二手母婴</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="swiper-slide">
+                    <div class="nav clearfix">
+                        <div class="nav-a" href="#">
+                            <img class="lazy_entrance" src="http://pic.app.hualongxiang.com/_20170925163702_59c8c02e5574f.jpg" />
+                            <span>网购市场</span>
+                        </div>
+                        <div class="nav-a" href="#">
+                            <img class="lazy_entrance" src="http://pic.app.hualongxiang.com/_20170925163711_59c8c0370c54f.jpg" />
+                            <span>跳蚤市场</span>
+                        </div>
+                        <div class="nav-a" href="#">
+                            <img class="lazy_entrance" src="http://pic.app.hualongxiang.com/_20170925163702_59c8c02e5574f.jpg" />
+                            <span>房屋信息</span>
+                        </div>
+                        <div class="nav-a" href="#">
+                            <img class="lazy_entrance" src="http://pic.app.hualongxiang.com/_20170925163711_59c8c0370c54f.jpg" />
+                            <span>商家自荐</span>
+                        </div>
+                        <div class="nav-a" href="#">
+                            <img class="lazy_entrance" src="http://pic.app.hualongxiang.com/_20170925163702_59c8c02e5574f.jpg" />
+                            <span>手机交易</span>
+                        </div>
+                        <div class="nav-a" href="#">
+                            <img class="lazy_entrance" src="http://pic.app.hualongxiang.com/_20170925163711_59c8c0370c54f.jpg" />
+                            <span>招聘信息</span>
+                        </div>
+                        <div class="nav-a" href="#">
+                            <img class="lazy_entrance" src="http://pic.app.hualongxiang.com/_20170925163702_59c8c02e5574f.jpg" />
+                            <span>数码游戏</span>
+                        </div>
+                        <div class="nav-a" href="#">
+                            <img class="lazy_entrance" src="http://pic.app.hualongxiang.com/_20170925163711_59c8c0370c54f.jpg" />
+                            <span>二手母婴</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-loop swiper-pagination"></div>
+        </div>
+        <!-- nav end -->
+        <!-- main begin -->
+        <div class="content">
+            <div class="content-title">最新发布</div>
+            <div class="content-list">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <div class="news">
+                                <p>秋天的正午，阳光照耀下来，花没有蔫下去，反而是被风吹的更抖擞了。</p>
+                                <div class="news-img photos">
+                                    <span><img src="http://pic.hualongxiang.com/attachment/Day_171023/103_2650535_895963eae284dcf.s.452x348.jpg"></span>
+                                    <span><img src="http://pic.hualongxiang.com/attachment/Day_171023/103_2650535_c7df1d8e57bd5a9.s.452x348.jpg"></span>
+                                    <span><img src="http://pic.hualongxiang.com/attachment/Day_171023/212_2813167_0bd3add86febda43.s.452x348.jpg"></span>
+                                </div>
+                                <div class="news-review">
+                                    <span>致我</span>
+                                    <span><i>5918</i>阅读</span>
+                                    <span class="fr">5秒前</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="news only-one">
+                                <p>天空中飘舞着800万个花瓣会是什么感觉，来看看</p>
+                                <!-- <div class="news-img photos">
+                                    <span><img src="http://pic.hualongxiang.com/attachment/Day_171023/103_2650535_895963eae284dcf.s.452x348.jpg"></span>
+                                    <span><img src="http://pic.hualongxiang.com/attachment/Day_171023/103_2650535_c7df1d8e57bd5a9.s.452x348.jpg"></span>
+                                    <span><img src="http://pic.hualongxiang.com/attachment/Day_171023/212_2813167_0bd3add86febda43.s.452x348.jpg"></span>
+                                </div> -->
+                                <div class="news-review">
+                                    <span>穷苦的人</span>
+                                    <span><i>5.9万</i>阅读</span>
+                                </div>
+                            </div>
+                            <div class="news-img photo">
+                                    <img src="http://pic.hualongxiang.com/attachment/Day_171023/103_2650535_895963eae284dcf.s.452x348.jpg">
+                                </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- main end -->
+    </div>
+    <script type="text/javascript">
+        //轮播图
+        $(".banner-img").swiper({
+            loop: false,
+            autoplay: 3000,
+            autoplayDisableOnInteraction : false
+        });
+        $(".banner-icon").swiper({
+            loop: false,
+        });
+
+        // 加载刷新。
+        function refresh() {
+        //function refresh(loadmore) {
+            $(window).scroll(function(){
+                console.log('正在滑动');
+
+                var scrollTop = $(this).scrollTop();    //滚动条距离顶部的高度
+                var scrollHeight = $(document).height();   //当前页面的总高度
+                var clientHeight = $(this).height();    //当前可视的页面高度
+                console.log("top:"+scrollTop+",doc:"+scrollHeight+",client:"+clientHeight);
+                if(scrollTop + clientHeight >= scrollHeight){   //距离顶部+当前高度 >=文档总高度 即代表滑动到底部 
+                    // count++;         //每次滑动count加1
+                    // filterData(serviceTypeId,industryId,cityId,count); //调用筛选方法，count为当前分页数
+                    alert('下拉');
+
+                    // if(loadmore){
+                    //     loadmore();
+                    // }
+                }else if(scrollTop<=0){
+                    //滚动条距离顶部的高度小于等于0 TODO
+                    //alert("下拉刷新，要在这调用啥方法？");
+      
+                    alert('上拉');
+                    // if(refresh){
+                    //     refresh();
+                    // }
+
+                }
+
+            });
+        };
+
+        //调用
+        refresh()
+        //refresh(loadmore);
+    </script>
+</body>
+</html>

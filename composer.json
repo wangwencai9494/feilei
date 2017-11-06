@@ -1,0 +1,26 @@
+{
+  "name": "zunxiang/fenlei",
+  "description": "fenlei xinxi",
+  "type": "yii2-extension",
+  "keywords": ["yii2","extension"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "wangwencai",
+      "email": "1037669953@qq.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "yiisoft/yii2": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "zunxiang\\fenlei\\": "src/"
+    }
+  },
+  "config": {
+    "process-timeout": 1800,
+    "secure-http": false
+  }
+}
