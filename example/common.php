@@ -24,14 +24,16 @@ $application = new yii\web\Application([
         'secret_key' => '3344'
     ]
 ]);
-
+//1.composer install todo
+//2.css and js into view todo
+//3.else function todo
 
 Yii::$app->setComponents([
     'db' => [
         'class' => 'yii\db\Connection',
-        'dsn' => 'mysql:host=61.160.251.70;dbname=side',
-        'username' => 'hlxdev',
-        'password' => 'hlx_dev.123456@#',
+        'dsn' => 'mysql:host=localhost;dbname=app',
+        'username' => 'root',
+        'password' => '123456',
         'tablePrefix' => 's_',
         'enableSchemaCache' => true,
         'schemaCacheDuration' => 600,
@@ -40,13 +42,6 @@ Yii::$app->setComponents([
             PDO::ATTR_PERSISTENT => true
         ],
     ],
-    'redis' => [
-        'class' => \qianfan\redis\Connection::className(),
-        'hostname' => '127.0.0.1',
-        'port' => '6379',
-        'password' => null,
-        'database' => 1,
-    ],
     'response' => [
         'class' => \yii\web\Response::className(),
         'format' => yii\web\Response::FORMAT_HTML,
@@ -54,28 +49,6 @@ Yii::$app->setComponents([
     ]
 ]);
 
-Yii::$app->setModule('bbs-stream', new \zunxiang\bbsstream\BbsStream('bbs-stream', null, [
-    'redis' => 'redis'
-]));
+Yii::$app->setModule('sort-module', new \zunxiang\fenlei\SortModule('sort-module', null));
 
-$module = Yii::$app->getModule('bbs-stream');
-
-function sign($params, $secret_key)
-{
-    $nonce = rand(10000, 99999);
-    $timestamp = time();
-    $array = array($nonce, $timestamp, $secret_key);
-    sort($array, SORT_STRING);
-    $token = md5(implode($array));
-    $params['nonce'] = $nonce;
-    $params['timestamp'] = $timestamp;
-    $params['token'] = $token;
-
-    $params = array_merge($params, $get_params);
-
-    $url .= '?';
-    foreach ($params as $k => $v) {
-        $url .= $k . '=' . $v . '&';
-    }
-    $url = rtrim($url, '&');
-}
+$module = Yii::$app->getModule('sort-module');

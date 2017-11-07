@@ -16,6 +16,20 @@ class SiteConfig extends \zunxiang\fenlei\models\SiteConfig
         if(!$key){
             return '';
         }
+        $configs = SiteConfig::find()->asArray()->all();
+        if( !empty($configs) ) {
+            $cfg = [];
+            foreach ($configs as $config) {
+                $cfg[$config['config_name']] = $config['config_value'];
+            }
+        }
+        if( !empty($cfg) && isset($cfg[$key]) )
+        {
+            return $cfg[$key];
+        }
+
+        return false;
+
         if( Yii::$app->cache->exists('qianfan-site-config') )
         {
             $cfg = Yii::$app->cache->get('qianfan-site-config');

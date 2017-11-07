@@ -61,11 +61,11 @@ class Tool {
             //增加REMOTE PORT
             $post_data['remote_port'] = isset($_SERVER['REMOTE_PORT']) ? $_SERVER['REMOTE_PORT'] : 0;
 
-            if( !isset($post_data['nonce']) )
+            if( !isset($post_data['nonce']))
             {
                 //增加校验参数
-                $post_data['nonce'] = self::nonce(32);
-                $post_data['codeSign'] = self::sign( $post_data, Yii::$app->params['secret_key'] );
+                //$post_data['nonce'] = self::nonce(32);
+                //$post_data['codeSign'] = self::sign( $post_data, FORUM_SECRET_KEY );
 
             }
 
@@ -93,7 +93,7 @@ class Tool {
         return $data;
     }
 
-    public function nonce($length = 32){
+    public static function nonce($length = 32){
         $chars = "abcdefghijklmnopqrstuvwxyz0123456789";
         $str = "";
         for ($i = 0; $i < $length; $i++) {
@@ -103,7 +103,7 @@ class Tool {
     }
 
 
-    public function sign($params,$secret){
+    public static function sign($params,$secret){
         ksort($params);
         $sparams = array();
         foreach ($params as $k => $v) {
@@ -120,11 +120,11 @@ class Tool {
      * @param $post_data
      * @return array|string
      */
-    public function _convert($post_data)
+    public static function _convert($post_data)
     {
         if (is_array($post_data)) {
             return array_map(function ($post_data) {
-                return $this->_convert($post_data);
+                return self::_convert($post_data);
             }, $post_data);
         } else {
             if (is_string($post_data)) {

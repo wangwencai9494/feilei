@@ -26,14 +26,14 @@ class GetSortListAction extends BaseAction{
     public function run(){
         //新 分类信息 页面
 
-
+        //exit('xxx');
         //首页广告
         $top_ad = Activity::getIndexTopAd();
         //板块
+
         $forumInfo = [];
         //帖子列表+ 广告
         $threadList = [];
-        $threadList['ad'] = [];
         //获取小后台配置 VIRTUAL_SORT_SETTING
         $sort_setting = SiteConfig::getVal('VIRTUAL_SORT_SETTING');
         $forums_id = json_decode($sort_setting);
@@ -45,46 +45,63 @@ class GetSortListAction extends BaseAction{
                 ->indexBy('fid')
                 ->asArray()
                 ->all();
-
-            foreach($forums_id as $fid){
-                $forumInfo[]['fid'] = $forums[$fid]['fid'];
-                $forumInfo[]['fname'] = $forums[$fid]['fname'];
-                $forumInfo[]['direct_url'] = $forums[$fid]['direct_url'];
-                $forumInfo[]['logo'] = $forums[$fid]['logo'];
-                $forumInfo[]['default_fname'] = $forums[$fid]['default_fname'];
+            $forum = [];
+            foreach($forums_id as $k=>$fid){
+                $forum[$k]['fid'] = $forums[$fid]['fid'];
+                $forum[$k]['fname'] = $forums[$fid]['fname'];
+                $forum[$k]['direct_url'] = $forums[$fid]['direct_url'];
+                $forum[$k]['logo'] = $forums[$fid]['logo'];
+                $forum[$k]['default_fname'] = $forums[$fid]['default_fname'];
+                if(is_int(($k+1)/8) || !isset($forums_id[$k+1])){
+                    $forumInfo[] = $forum;
+                    $forum = [];
+                }
             }
 
             //帖子列表  增加广告位，按照发布时间排
             $fids = implode(',',$forums_id);
             $postParams = [
-                'action'=>'GetThreadsByFid',
+                'action'=>'getThreadsByFid',
                 'fids'=>$fids,
                 'ordertype'=>1,     //排序方式  1 发帖日期倒序 0 最后回复时间倒序
                 'offset'=>0,
                 'limit'=>10
             ];
-            $responseString = Tool::request($postParams);
-            $response = json_decode($responseString);
 
-            if (!empty($response) && !empty($response['data'])) {
+            $responseString = Tool::request($postParams);
+
+            $response = json_decode($responseString,true);
+
+            if (!empty($response) && !empty($response['data']) && $response['errCode'] == 0 ) {
                 $threads = $response['data'];
-                foreach($threads as $thread){
-                    $temp = [];
-                    foreach($thread as $val){
-                        $temp['tid'] = $val['tid'];
-                        $temp['tid'] = $val['tid'];
-                    }
-                    $threadList['thread'][] = $temp;
+                foreach($threads as $val){
+                    $thread = [];
+                    $thread['tid'] = $val['tid'];
+                    $thread['subject'] = $val['subject'];
+                    $thread['attnum'] = $val['attnum'];
+                    $thread['attachs'] = $val['attachs'];
+                    $thread['author'] = $val['author'];
+
+                    $threadList[] = $thread;
                 }
 
             }
-            $tpl = 'sort/index.html';
+            $top_ad = Tool::_convert($top_ad);
+            $forumInfo = Tool::_convert($forumInfo);
+            $threadList = Tool::_convert($threadList);
+var_export(print_r([
+    'top_ad'=>$top_ad,
+    'forum_info'=>$forumInfo,
+    'threads'=>$threadList
+]),true);exit;
+            $tpl = '/sort/index.php';
             $html = Yii::$app->getView()->render($tpl,[
                 'top_ad'=>$top_ad,
                 'forum_info'=>$forumInfo,
                 'threads'=>$threadList
             ]);
 
+            return $html;
         }
 
 

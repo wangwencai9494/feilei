@@ -18,7 +18,15 @@ class SortController extends BaseController{
             'get-sort-list'=>[
                 'class'=> GetSortListAction::classname(),
                 'fids'=>Yii::$app->request->post('fids'),
-            ]
+            ],
+            'up-refresh'=>[
+                'class'=> GetSortListAction::classname(),
+                'fids'=>Yii::$app->request->post('fids'),
+            ],
+            'down-refresh'=>[
+                'class'=> GetSortListAction::classname(),
+                'fids'=>Yii::$app->request->post('fids'),
+            ],
         ];
     }
 }

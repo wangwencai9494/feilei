@@ -12,7 +12,8 @@
   ],
   "minimum-stability": "stable",
   "require": {
-    "yiisoft/yii2": "*"
+    "yiisoft/yii2": "*",
+    "qianfan/forum": "dev-master"
   },
   "autoload": {
     "psr-4": {
@@ -22,5 +23,11 @@
   "config": {
     "process-timeout": 1800,
     "secure-http": false
-  }
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "http://git.shangxiaban.cn:3000/Qianfan/qianfan-forum.git"
+    }
+  ]
 }
