@@ -13,6 +13,7 @@
   "minimum-stability": "stable",
   "require": {
     "yiisoft/yii2": "*",
+    "sillydong/yii2-signrequest": "dev-master",
     "qianfan/forum": "dev-master"
   },
   "autoload": {
@@ -25,6 +26,10 @@
     "secure-http": false
   },
   "repositories": [
+    {
+      "type": "git",
+      "url": "http://git.shangxiaban.cn:3000/Yii2/yii2-signrequest.git"
+    },
     {
       "type": "git",
       "url": "http://git.shangxiaban.cn:3000/Qianfan/qianfan-forum.git"

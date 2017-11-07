@@ -25,7 +25,7 @@ $application = new yii\web\Application([
     ]
 ]);
 //1.composer install todo
-//2.css and js into view todo
+//2.css and js into view todo  http://www.yiiframework.com/doc-2.0/yii-web-assetbundle.html
 //3.else function todo
 
 Yii::$app->setComponents([

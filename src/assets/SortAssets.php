@@ -15,12 +15,12 @@ class SortAssets extends BaseAsset
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'public/skin/default_skin/css/theme.css',
+        'static/css/style.css',
     ];
     public $js = [
-        'public/vendor/jquery/jquery-1.11.1.min.js',
-        'public/vendor/jquery/jquery_ui/jquery-ui.min.js',
-        'public/js/bootstrap/bootstrap.min.js',
+        'static/js/jquery-1.11.2.min.js',
+        'static/js/jquery-1.8.3.min.js',
+        'static/js/swiper.js',
     ];
 
     //依赖包
@@ -28,14 +28,14 @@ class SortAssets extends BaseAsset
         //这里写你的依赖包即可，没有就别写
     ];
 
-    //导入当前页的功能js文件，注意加载顺序，这个应该最后调用
-    public static function addPageScript($view, $jsfile) {
-        $view->registerJsFile($jsfile, [SortAssets::className(), 'depends' => 'app\assets\AppAsset']);
-    }
-
-    //导入编辑器
-    public static function addCkeditor($view) {
-        $view->registerJsFile('/public/js/utility/ckeditor/ckeditor.js', [SortAssets::className(), 'depends' => 'app\assets\AppAsset']);
-    }
+//    //导入当前页的功能js文件，注意加载顺序，这个应该最后调用
+//    public static function addPageScript($view, $jsfile) {
+//        $view->registerJsFile($jsfile, [SortAssets::className(), 'depends' => 'app\assets\AppAsset']);
+//    }
+//
+//    //导入编辑器
+//    public static function addCkeditor($view) {
+//        $view->registerJsFile('/public/js/utility/ckeditor/ckeditor.js', [SortAssets::className(), 'depends' => 'app\assets\AppAsset']);
+//    }
 
 }
