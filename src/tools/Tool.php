@@ -64,8 +64,8 @@ class Tool {
             if( !isset($post_data['nonce']))
             {
                 //增加校验参数
-                //$post_data['nonce'] = self::nonce(32);
-                //$post_data['codeSign'] = self::sign( $post_data, FORUM_SECRET_KEY );
+                $post_data['nonce'] = self::nonce(32);
+                $post_data['codeSign'] = self::sign( $post_data, FORUM_SECRET_KEY );
 
             }
 
@@ -175,5 +175,35 @@ class Tool {
 
         return $ip;
     }
+    public static function View_CN($num){
+        if($num<10000){
+            return $num;
+        }
+        elseif($num<100000000){
+            return (floor($num/1000)/10).'万';
+        }
+        elseif($num>=100000000){
+            return (floor($num/10000000)/10).'亿';
+        }
+    }
+
+    public static function Time_CN($time){
+        $t = time() - $time;
+        if($t > 0){
+            if($t < 60){
+                return $t.'秒';
+            }elseif($t < 3600){
+                return (floor($t / 60)).'分';
+            }elseif($t < 86400) {
+                return (floor($t / 3600)) . '时';
+            }else{
+                return (floor($t / 86400)) . '天';
+            }
+
+        }else{
+            return false;
+        }
+    }
+
 }
 

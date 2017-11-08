@@ -1,7 +1,10 @@
 <?php
 use zunxiang\fenlei\assets\SortAssets;
 
+
 SortAssets::register($this);
+
+//exit;
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +20,9 @@ SortAssets::register($this);
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <?php $this->head();?>
 <!--    <link rel="stylesheet" type="text/css" href="/sort/css/style.css">-->
+<!--    --><?php //SortAssets::addCss($this,'/sort/css/style.css');?>
+<!--    --><?php //SortAssets::addScript($this,'/sort/js/jquery-1.11.2.min.js');?>
+<!--    --><?php //SortAssets::addScript($this,'/sort/js/swiper.js');?>
 <!--    <script type="text/javascript" src="/sort/js/jquery-1.11.2.min.js"></script>-->
 <!--    <script type="text/javascript" src="/sort/js/swiper.js"></script>-->
     <script>
@@ -43,7 +49,7 @@ SortAssets::register($this);
         <div class="banner-img swiper-container">
             <div class="swiper-wrapper">
                 <?php foreach($top_ad as $activity){?>
-                <a href="<?=$activity['']?>" class="swiper-slide">
+                <a href="javascript:void(0)" class="swiper-slide jump_type" data-url="<?=$activity['']?>" data-tid="" data-fid="">
                     <img src="<?=$activity['']?>" />
                     <p><?=$activity['name']?></p></a>
                 <?php }?>
@@ -56,27 +62,30 @@ SortAssets::register($this);
             <div class="swiper-wrapper">
                 <?php foreach($forum_info as $key => $forums){?>
                     <?php if($key == 0){?>
-                <a class="swiper-slide">
-                    <?php foreach($forums as $forum){?>
+                <a href="javascript:void(0)" class="swiper-slide">
+                        <?php foreach($forums as $forum){?>
                     <div class="nav clearfix">
-                        <div class="nav-a" href="<?=$forum['direct_url']?>">
+                        <div class="nav-a jump_type"  data-url="<?=$forum['direct_url']?>" data-tid="" data-fid="<?=$forum['fid']?>">
                             <img class="lazy_entrance" src="<?=$forum['logo']?>" />
                             <span><?=$forum['default_name']?></span>
                         </div>
                     </div>
-                    <?php }?>
+                        <?php }?>
                 </a>
+
                     <?php }else{?>
-                <a href="#" class="swiper-slide">
-                    <?php foreach($forums as $forum){?>
-                        <div class="nav clearfix">
-                            <div class="nav-a" href="<?=$forum['direct_url']?>">
-                                <img class="lazy_entrance" src="<?=$forum['logo']?>" />
-                                <span><?=$forum['default_name']?></span>
-                            </div>
+
+                <a href="javascript:void(0)" class="swiper-slide" >
+                        <?php foreach($forums as $forum){?>
+                    <div class="nav clearfix">
+                        <div class="nav-a jump_type"  data-url="<?=$forum['direct_url']?>" data-tid="" data-fid="<?=$forum['fid']?>">
+                            <img class="lazy_entrance" src="<?=$forum['logo']?>" />
+                            <span><?=$forum['default_name']?></span>
                         </div>
-                    <?php }?>
+                    </div>
+                        <?php }?>
                 </a>
+
                 <?php }}?>
             </div>
 
@@ -90,20 +99,25 @@ SortAssets::register($this);
                 <ul>
                     <?php foreach($threads as $thread){?>
                     <li>
-                        <a href="#">
-                            <div class="news">
-                                <p>秋天的正午，阳光照耀下来，花没有蔫下去，反而是被风吹的更抖擞了。</p>
+                        <a href="javascript:void(0)" class="jump_type" data-url="" data-tid="<?=$thread['tid']?>" data-fid="" >
+                            <div class="news <?php if($thread['attnum'] == 1) echo 'only-one'?>">
+                                <p><?=$thread['subject']?></p>
                                 <div class="news-img photos">
-                                    <?php foreach($thread as $val){?>
+                                    <?php if($thread['attnum'] == 3){ foreach($thread['attachs'] as $val){?>
                                     <span><img src="<?=$val['attach']?>"></span>
-                                    <?php }?>
+                                    <?php }}?>
                                 </div>
                                 <div class="news-review">
                                     <span><?=$thread['author']?></span>
-                                    <span><i>5918</i>阅读</span>
-                                    <span class="fr">5秒前</span>
+                                    <span><i><?=$thread['views']?></i>阅读</span>
+                                    <?php if($thread['attnum'] != 1){?> <span class="fr"><?=$thread['time']?></span><?php }?>
                                 </div>
                             </div>
+                            <?php if($thread['attnum'] == 1){?>
+                                <div class="news-img photo">
+                                    <img src="<?php if($thread['attachs'][0]) echo $thread['attachs'][0]; ?>">
+                                </div>
+                            <?php }?>
                         </a>
                     </li>
                     <?php }?>
@@ -113,6 +127,17 @@ SortAssets::register($this);
         <!-- main end -->
     </div>
     <script type="text/javascript">
+        //跳转。。。。。
+        $(".jump_type").click(function(){
+            var url = $(this).attr('data-url');
+            var tid = $(this).attr('data-tid');
+            var fid = $(this).attr('data-fid');
+
+            if(url != '' && tid == '') QFWap.openUrl(url);
+            if(tid != '' && url == '' && fid == '') QFH5.jumpThread(parseInt(tid));
+            if(fid != '' && tid == '' && url == '') QFH5.jumpThreadList(parseInt(fid));
+
+        }
         //轮播图
         $(".banner-img").swiper({
             loop: false,
@@ -136,11 +161,26 @@ SortAssets::register($this);
                 if(scrollTop + clientHeight >= scrollHeight){   //距离顶部+当前高度 >=文档总高度 即代表滑动到底部 
                     // count++;         //每次滑动count加1
                     // filterData(serviceTypeId,industryId,cityId,count); //调用筛选方法，count为当前分页数
-                    alert('下拉');
+                    //alert('下拉');
 
-                    // if(loadmore){
-                    //     loadmore();
-                    // }
+                    $.ajax({
+                        type: "POST",
+                        url: window.location.href,
+                        data: {page:page,fids:'ajax'},
+                        dataType: 'json',
+                        success: function(data) {
+                            var html;
+                            html = $('#post_list');
+                            if(data){
+                                html.append(node);
+                            } else {
+                                pullUpEl.find('.pullUpLabel').html("");
+                                pullUpEl.unbind('click');
+                            }
+                            pullUpEl.removeClass("loading");
+                        }
+                    });
+
                 }else if(scrollTop<=0){
                     //滚动条距离顶部的高度小于等于0 TODO
                     //alert("下拉刷新，要在这调用啥方法？");

@@ -26,7 +26,6 @@ class GetSortListAction extends BaseAction{
     public function run(){
         //新 分类信息 页面
 
-        //exit('xxx');
         //首页广告
         $top_ad = Activity::getIndexTopAd();
         //板块
@@ -49,7 +48,7 @@ class GetSortListAction extends BaseAction{
             foreach($forums_id as $k=>$fid){
                 $forum[$k]['fid'] = $forums[$fid]['fid'];
                 $forum[$k]['fname'] = $forums[$fid]['fname'];
-                $forum[$k]['direct_url'] = $forums[$fid]['direct_url'];
+                $forum[$k]['direct_url'] = $forums[$fid]['direct_url'] ? $forums[$fid]['direct_url'] : '';
                 $forum[$k]['logo'] = $forums[$fid]['logo'];
                 $forum[$k]['default_fname'] = $forums[$fid]['default_fname'];
                 if(is_int(($k+1)/8) || !isset($forums_id[$k+1])){
@@ -61,7 +60,7 @@ class GetSortListAction extends BaseAction{
             //帖子列表  增加广告位，按照发布时间排
             $fids = implode(',',$forums_id);
             $postParams = [
-                'action'=>'getThreadsByFid',
+                'action'=>'getThreadsByFids',
                 'fids'=>$fids,
                 'ordertype'=>1,     //排序方式  1 发帖日期倒序 0 最后回复时间倒序
                 'offset'=>0,
@@ -81,6 +80,8 @@ class GetSortListAction extends BaseAction{
                     $thread['attnum'] = $val['attnum'];
                     $thread['attachs'] = $val['attachs'];
                     $thread['author'] = $val['author'];
+                    $thread['views'] = Tool::View_CN($val['hits']);
+                    $thread['time'] = Tool::Time_CN($val['postdate']);
 
                     $threadList[] = $thread;
                 }
@@ -89,11 +90,11 @@ class GetSortListAction extends BaseAction{
             $top_ad = Tool::_convert($top_ad);
             $forumInfo = Tool::_convert($forumInfo);
             $threadList = Tool::_convert($threadList);
-var_export(print_r([
-    'top_ad'=>$top_ad,
-    'forum_info'=>$forumInfo,
-    'threads'=>$threadList
-]),true);exit;
+//var_export(print_r([
+//    'top_ad'=>$top_ad,
+//    'forum_info'=>$forumInfo,
+//    'threads'=>$threadList
+//]),true);exit;
             $tpl = '/sort/index.php';
             $html = Yii::$app->getView()->render($tpl,[
                 'top_ad'=>$top_ad,
